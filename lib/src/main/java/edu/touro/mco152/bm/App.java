@@ -51,11 +51,11 @@ public class App {
     public static double rMax = -1, rMin = -1, rAvg = -1;
 
 
-    //SwingUI si = new SwingUI();
+    SwingUI si = new SwingUI();
 
-   // public void setSi(SwingUI si){
-        // this.si = si;
-   // }
+    public void setSi(SwingUI si){
+         this.si = si;
+    }
     /**
      * @param args the command line arguments
      */
@@ -246,8 +246,8 @@ public class App {
             msg("worker is null abort...");
             return;
         }
-   //SwingUI si = new SwingUI(); //new
-    //    si.cancel(true);
+       SwingUI si = new SwingUI(); //new
+        si.cancel(true);
     }
 
     public static void startBenchmark() {
@@ -293,7 +293,7 @@ public class App {
         });
 
         //5. start the Swing worker thread
-        si.execute(); //chnaged from worker.execute
+        si.execute(); //changed from worker.execute
     }
 
     /**
