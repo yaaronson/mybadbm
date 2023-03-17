@@ -50,6 +50,12 @@ public class App {
     public static double wMax = -1, wMin = -1, wAvg = -1;
     public static double rMax = -1, rMin = -1, rAvg = -1;
 
+
+    //SwingUI si = new SwingUI();
+
+   // public void setSi(SwingUI si){
+        // this.si = si;
+   // }
     /**
      * @param args the command line arguments
      */
@@ -240,7 +246,8 @@ public class App {
             msg("worker is null abort...");
             return;
         }
-        worker.cancel(true);
+   //SwingUI si = new SwingUI(); //new
+    //    si.cancel(true);
     }
 
     public static void startBenchmark() {
@@ -263,8 +270,9 @@ public class App {
         Gui.mainFrame.adjustSensitivity();
 
         //4. set up disk worker thread and its event handlers
-        worker = new DiskWorker();
-        worker.addPropertyChangeListener((final PropertyChangeEvent event) -> {
+        //worker = new DiskWorker();
+        SwingUI si = new SwingUI(); //new
+        si.addPropertyChangeListener((final PropertyChangeEvent event) -> {
             switch (event.getPropertyName()) {
                 case "progress":
                     int value = (Integer) event.getNewValue();
@@ -285,7 +293,7 @@ public class App {
         });
 
         //5. start the Swing worker thread
-        worker.execute();
+        si.execute(); //chnaged from worker.execute
     }
 
     /**
