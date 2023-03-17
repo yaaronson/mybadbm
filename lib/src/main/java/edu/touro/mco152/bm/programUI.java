@@ -3,7 +3,7 @@ package edu.touro.mco152.bm;
 import java.util.List;
 
 /**
- *
+ * 
  */
 
 public interface programUI {
@@ -19,5 +19,7 @@ public interface programUI {
 
     void publishpi(DiskMark wMark);
 
-    //Boolean getpi();
+    void message(String message);
+
+    int getProgresspi();
 }

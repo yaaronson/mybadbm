@@ -26,8 +26,8 @@ public class SwingUI extends SwingWorker<Boolean, DiskMark> implements programUI
     @Override
     protected Boolean doInBackground() throws Exception {
         Logger.getLogger(App.class.getName()).log(Level.INFO, "*** New worker thread started ***");
-        msg("Running readTest " + App.readTest + "   writeTest " + App.writeTest);
-        msg("num files: " + App.numOfMarks + ", num blocks: " + App.numOfBlocks
+        message("Running readTest " + App.readTest + "   writeTest " + App.writeTest);
+        message("num files: " + App.numOfMarks + ", num blocks: " + App.numOfBlocks
                 + ", blk size (kb): " + App.blockSizeKb + ", blockSequence: " + App.blockSequence);
 
         /*
@@ -70,7 +70,7 @@ public class SwingUI extends SwingWorker<Boolean, DiskMark> implements programUI
             run.setDiskInfo(Util.getDiskInfo(dataDir));
 
             // Tell logger and GUI to display what we know so far about the Run
-            msg("disk info: (" + run.getDiskInfo() + ")");
+            message("disk info: (" + run.getDiskInfo() + ")");
 
             Gui.chartPanel.getChart().getTitle().setVisible(true);
             Gui.chartPanel.getChart().getTitle().setText(run.getDiskInfo());
@@ -134,7 +134,7 @@ public class SwingUI extends SwingWorker<Boolean, DiskMark> implements programUI
                 double sec = (double) elapsedTimeNs / (double) 1000000000;
                 double mbWritten = (double) totalBytesWrittenInMark / (double) MEGABYTE;
                 wMark.setBwMbSec(mbWritten / sec);
-                msg("m:" + m + " write IO is " + wMark.getBwMbSecAsString() + " MB/s     "
+                message("m:" + m + " write IO is " + wMark.getBwMbSecAsString() + " MB/s     "
                         + "(" + Util.displayString(mbWritten) + "MB written in "
                         + Util.displayString(sec) + " sec)");
                 App.updateMetrics(wMark);
@@ -189,7 +189,7 @@ public class SwingUI extends SwingWorker<Boolean, DiskMark> implements programUI
             run.setTxSize(App.targetTxSizeKb());
             run.setDiskInfo(Util.getDiskInfo(dataDir));
 
-            msg("disk info: (" + run.getDiskInfo() + ")");
+            message("disk info: (" + run.getDiskInfo() + ")");
 
             Gui.chartPanel.getChart().getTitle().setVisible(true);
             Gui.chartPanel.getChart().getTitle().setText(run.getDiskInfo());
@@ -227,7 +227,7 @@ public class SwingUI extends SwingWorker<Boolean, DiskMark> implements programUI
                     String emsg = "May not have done Write Benchmarks, so no data available to read." +
                             ex.getMessage();
                     JOptionPane.showMessageDialog(Gui.mainFrame, emsg, "Unable to READ", JOptionPane.ERROR_MESSAGE);
-                    msg(emsg);
+                    message(emsg);
                     return false;
                 }
                 long endTime = System.nanoTime();
@@ -235,7 +235,7 @@ public class SwingUI extends SwingWorker<Boolean, DiskMark> implements programUI
                 double sec = (double) elapsedTimeNs / (double) 1000000000;
                 double mbRead = (double) totalBytesReadInMark / (double) MEGABYTE;
                 rMark.setBwMbSec(mbRead / sec);
-                msg("m:" + m + " READ IO is " + rMark.getBwMbSec() + " MB/s    "
+                message("m:" + m + " READ IO is " + rMark.getBwMbSec() + " MB/s    "
                         + "(MBread " + mbRead + " in " + sec + " sec)");
                 App.updateMetrics(rMark);
                 publishpi(rMark);
@@ -323,9 +323,14 @@ public class SwingUI extends SwingWorker<Boolean, DiskMark> implements programUI
         publish(wMark);
     }
 
-//    @Override
-//    public Boolean getpi() {
-//        return get();
-//    }
+    @Override
+    public void message(String message) {
+        Gui.mainFrame.msg(message);
+    }
+
+    @Override
+    public int getProgresspi() {
+        return 0;
+    }
 }
 
