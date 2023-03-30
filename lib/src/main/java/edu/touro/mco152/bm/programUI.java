@@ -1,5 +1,7 @@
 package edu.touro.mco152.bm;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.List;
 
 /**
@@ -22,4 +24,11 @@ public interface programUI {
     void message(String message);
 
     int getProgresspi();
+
+
+    void cancelpi(boolean b);
+
+    void addPropertyChangeListenerpi(PropertyChangeListener event);
+
+     void executepi();
 }

@@ -4,6 +4,7 @@ import edu.touro.mco152.bm.ui.Gui;
 import edu.touro.mco152.bm.ui.MainFrame;
 import org.junit.jupiter.api.Test;
 
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.List;
 import java.util.Properties;
@@ -58,6 +59,21 @@ class BadbmTest implements programUI{
     @Override
     public int getProgresspi() {
         return 0;
+    }
+
+    @Override
+    public void cancelpi(boolean b) {
+
+    }
+
+    @Override
+    public void addPropertyChangeListenerpi(PropertyChangeListener event) {
+
+    }
+
+    @Override
+    public void executepi() {
+
     }
 
 }
