@@ -3,7 +3,7 @@ package edu.touro.mco152.bm;
 import java.util.List;
 
 /**
- * 
+ * This interface defines the methods for a program's user interface.
  */
 
 public interface programUI {

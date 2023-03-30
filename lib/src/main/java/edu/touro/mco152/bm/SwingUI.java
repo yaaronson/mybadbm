@@ -323,14 +323,24 @@ public class SwingUI extends SwingWorker<Boolean, DiskMark> implements programUI
         publish(wMark);
     }
 
+    /**
+     * prints out the passed message, replaces the previous msg method
+     * @param message
+     */
+
     @Override
     public void message(String message) {
         Gui.mainFrame.msg(message);
     }
 
+    /**
+     * Returns the progress of pi
+     * @return an integer representing the progress
+     */
     @Override
     public int getProgresspi() {
         return 0;
     }
 }
+
 

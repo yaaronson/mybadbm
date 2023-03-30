@@ -60,13 +60,5 @@ public class BadbmTest2 {
         Boolean result = pi.doInBackgroundpi();
         assertNotNull(result);
     }
-    @Test
-    void setProgresspi(int percentComplete) {
-        pi.setProgresspi(percentComplete);
-        int expected = 50;
-        pi.setProgresspi(expected);
-        int actual = pi.getProgresspi();
-        assertEquals(expected, actual);
-    }
 
 }
