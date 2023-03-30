@@ -25,7 +25,6 @@ public interface programUI {
 
     int getProgresspi();
 
-
     void cancelpi(boolean b);
 
     void addPropertyChangeListenerpi(PropertyChangeListener event);

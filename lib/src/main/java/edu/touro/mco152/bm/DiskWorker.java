@@ -297,33 +297,6 @@ public class DiskWorker  {
      * Module_6_RefactorBadBM Swing_DiskWorker_Tutorial.mp4
      * @param //mark a list of DiskMark objects reflecting some completed benchmarks
      */
-//    @Override
-//    protected void process(List<DiskMark> markList) {
-//        markList.stream().forEach((dm) -> {
-//            if (dm.type == DiskMark.MarkType.WRITE) {
-//                Gui.addWriteMark(dm);
-//            } else {
-//                Gui.addReadMark(dm);
-//            }
-//        });
-//    }
-//
-//
-//    @Override
-//    protected void done() {
-//        // Obtain final status, might from doInBackground ret value, or SwingWorker error
-//        try {
-//            lastStatus = super.get();   // record for future access
-//        } catch (Exception e) {
-//            Logger.getLogger(App.class.getName()).warning("Problem obtaining final status: " + e.getMessage());
-//        }
-//
-//        if (App.autoRemoveData) {
-//            Util.deleteDirectory(dataDir);
-//        }
-//        App.state = App.State.IDLE_STATE;
-//        Gui.mainFrame.adjustSensitivity();
-//    }
 
     public Boolean getLastStatus() {
         return lastStatus;
