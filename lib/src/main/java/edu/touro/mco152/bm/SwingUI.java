@@ -28,7 +28,7 @@ public class SwingUI extends SwingWorker<Boolean, DiskMark> implements programUI
 
     @Override
     public Boolean doInBackgroundpi() throws Exception {
-        return null;
+        return  App.worker.doInBackground();
     }
 
     /**
@@ -72,42 +72,42 @@ public class SwingUI extends SwingWorker<Boolean, DiskMark> implements programUI
 
     @Override
     public boolean isCancelledpi() {
-        return false;
+        return isCancelled();
     }
 
     @Override
     public void setProgresspi(int percentComplete) {
-
+            setProgress(percentComplete);
     }
 
     @Override
     public void publishpi(DiskMark wMark) {
-
+         publish();
     }
 
     @Override
     public void message(String message) {
-
+        Gui.mainFrame.msg(message);
     }
 
     @Override
     public int getProgresspi() {
-        return 0;
+        return getProgress();
     }
 
     @Override
     public void addPropertyChangeListenerpi(PropertyChangeListener event) {
-
+        addPropertyChangeListener(event);
     }
 
     @Override
     public void executepi() {
-
+        execute();
     }
 
     @Override
     public void cancelpi(boolean b) {
-
+        cancel(b);
     }
 
     /**
@@ -124,7 +124,7 @@ public class SwingUI extends SwingWorker<Boolean, DiskMark> implements programUI
      */
     @Override
     protected Boolean doInBackground() throws Exception {
-        return App.worker.doInBackground();
+        return doInBackgroundpi();
     }
 
 }

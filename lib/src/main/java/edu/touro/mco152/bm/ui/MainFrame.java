@@ -769,9 +769,9 @@ public final class MainFrame extends javax.swing.JFrame {
         App.writeSyncEnable = writeSyncCheckBoxMenuItem.getState();
         App.saveConfig();
     }//GEN-LAST:event_writeSyncCheckBoxMenuItemActionPerformed
-
+//---new----//
     private void clearRunsItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearRunsItemActionPerformed
-        App.msg("Clearing previous runs.");
+        App.pi.message("Clearing previous runs.");
         App.clearSavedRuns();
     }//GEN-LAST:event_clearRunsItemActionPerformed
     // End of variables declaration//GEN-END:variables

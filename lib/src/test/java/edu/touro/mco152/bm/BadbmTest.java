@@ -20,10 +20,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class BadbmTest implements programUI{
 
 
-    SwingUI si = new SwingUI();
+    int progress = 0;
+
     @Override
     public Boolean doInBackgroundpi() throws Exception {
-        return true;
+        return App.worker.doInBackground();
     }
 
     @Override
@@ -43,7 +44,7 @@ class BadbmTest implements programUI{
 
     @Override
     public void setProgresspi(int percentComplete) {
-
+            progress = percentComplete;
     }
 
     @Override
@@ -58,7 +59,7 @@ class BadbmTest implements programUI{
 
     @Override
     public int getProgresspi() {
-        return 0;
+        return progress;
     }
 
     @Override

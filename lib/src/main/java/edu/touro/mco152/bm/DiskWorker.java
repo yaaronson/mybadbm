@@ -1,6 +1,6 @@
 package edu.touro.mco152.bm;
 
-        import edu.touro.mco152.bm.persist.DiskRun;
+import edu.touro.mco152.bm.persist.DiskRun;
         import edu.touro.mco152.bm.persist.EM;
         import edu.touro.mco152.bm.ui.Gui;
 
@@ -57,8 +57,8 @@ public class DiskWorker  {
           call this doInBackground() method.
          */
         Logger.getLogger(App.class.getName()).log(Level.INFO, "*** New worker thread started ***");
-        msg("Running readTest " + App.readTest + "   writeTest " + App.writeTest);
-        msg("num files: " + App.numOfMarks + ", num blks: " + App.numOfBlocks
+        pu.message("Running readTest " + App.readTest + "   writeTest " + App.writeTest);
+        pu.message("num files: " + App.numOfMarks + ", num blks: " + App.numOfBlocks
                 + ", blk size (kb): " + App.blockSizeKb + ", blockSequence: " + App.blockSequence);
 
         /*
@@ -101,7 +101,7 @@ public class DiskWorker  {
             run.setDiskInfo(Util.getDiskInfo(dataDir));
 
             // Tell logger and GUI to display what we know so far about the Run
-            msg("disk info: (" + run.getDiskInfo() + ")");
+            pu.message("disk info: (" + run.getDiskInfo() + ")");
 
             Gui.chartPanel.getChart().getTitle().setVisible(true);
             Gui.chartPanel.getChart().getTitle().setText(run.getDiskInfo());
@@ -165,7 +165,7 @@ public class DiskWorker  {
                 double sec = (double) elapsedTimeNs / (double) 1000000000;
                 double mbWritten = (double) totalBytesWrittenInMark / (double) MEGABYTE;
                 wMark.setBwMbSec(mbWritten / sec);
-                msg("m:" + m + " write IO is " + wMark.getBwMbSecAsString() + " MB/s     "
+                pu.message("m:" + m + " write IO is " + wMark.getBwMbSecAsString() + " MB/s     "
                         + "(" + Util.displayString(mbWritten) + "MB written in "
                         + Util.displayString(sec) + " sec)");
                 App.updateMetrics(wMark);
@@ -220,7 +220,7 @@ public class DiskWorker  {
             run.setTxSize(App.targetTxSizeKb());
             run.setDiskInfo(Util.getDiskInfo(dataDir));
 
-            msg("disk info: (" + run.getDiskInfo() + ")");
+            pu.message("disk info: (" + run.getDiskInfo() + ")");
 
             Gui.chartPanel.getChart().getTitle().setVisible(true);
             Gui.chartPanel.getChart().getTitle().setText(run.getDiskInfo());
@@ -258,7 +258,7 @@ public class DiskWorker  {
                     String emsg = "May not have done Write Benchmarks, so no data available to read." +
                             ex.getMessage();
                     JOptionPane.showMessageDialog(Gui.mainFrame, emsg, "Unable to READ", JOptionPane.ERROR_MESSAGE);
-                    msg(emsg);
+                    pu.message(emsg);
                     return false;
                 }
                 long endTime = System.nanoTime();
@@ -266,7 +266,7 @@ public class DiskWorker  {
                 double sec = (double) elapsedTimeNs / (double) 1000000000;
                 double mbRead = (double) totalBytesReadInMark / (double) MEGABYTE;
                 rMark.setBwMbSec(mbRead / sec);
-                msg("m:" + m + " READ IO is " + rMark.getBwMbSec() + " MB/s    "
+                pu.message("m:" + m + " READ IO is " + rMark.getBwMbSec() + " MB/s    "
                         + "(MBread " + mbRead + " in " + sec + " sec)");
                 App.updateMetrics(rMark);
                 pu.publishpi(rMark);

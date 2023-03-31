@@ -28,6 +28,7 @@ public class BadbmTest2 {
     private void setupDefaultAsPerProperties()
     {
         /// Do the minimum of what  App.init() would do to allow torun.
+        App.worker = new DiskWorker(pi);
         Gui.mainFrame = new MainFrame();
         App.p = new Properties();
         App.loadConfig();
@@ -57,8 +58,16 @@ public class BadbmTest2 {
 
     @Test
     void doInBackground() throws Exception {
+        setupDefaultAsPerProperties();
         Boolean result = pi.doInBackgroundpi();
         assertNotNull(result);
+    }
+
+    @Test
+    void setProgressTest() throws Exception {
+        setupDefaultAsPerProperties();
+        Boolean result = pi.doInBackgroundpi();
+        assertEquals(100, pi.getProgresspi());
     }
 
 }
