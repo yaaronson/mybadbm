@@ -9,25 +9,57 @@ import java.util.List;
  */
 
 public interface programUI {
-    Boolean doInBackgroundpi() throws Exception;
 
-    void processpi(List<DiskMark> markList);
 
-    void donepi();
-
+    /**
+     * Checks if the task has been cancelled.
+     * @return true if cancelled, false if not
+     */
     boolean isCancelledpi();
 
+    /**
+     * Sets the progress of the task.
+     * @param percentComplete
+     */
     void setProgresspi(int percentComplete);
 
+    /**
+     * Publishes a disk mark for further processing.
+     * @param wMark
+     */
     void publishpi(DiskMark wMark);
 
-    void message(String message);
 
+//    /**
+//     *
+//     * @param message the messages to output
+//     */
+//    void message(String message);
+
+
+    /**
+     * Gets the progress of the task.
+     * @return
+     */
     int getProgresspi();
 
+
+    /**
+     * Cancels the task.
+     * @param b
+     */
     void cancelpi(boolean b);
 
+
+    /**
+     * Adds a property change listener to the task.
+     * @param event
+     */
     void addPropertyChangeListenerpi(PropertyChangeListener event);
 
+
+    /**
+     * Executes the tasks
+     */
      void executepi();
 }

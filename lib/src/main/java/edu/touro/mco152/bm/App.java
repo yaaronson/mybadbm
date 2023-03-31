@@ -234,13 +234,13 @@ public class App {
         loadSavedRuns();
     }
 
-//    public static void msg(String message) {
-//        Gui.mainFrame.msg(message);
-//    }
+    public static void msg(String message) {
+        Gui.mainFrame.msg(message);
+    }
 
     public static void cancelBenchmark() {
         if (worker == null) {
-            pi.message("worker is null abort..."); //msg("worker is null abort...");
+            msg("worker is null abort..."); //msg("worker is null abort...");
             return;
         }
         pi.cancelpi(true);
@@ -256,7 +256,7 @@ public class App {
         //1. check that there isn't already a worker in progress
         if (state == State.DISK_TEST_STATE) {
             //if (!worker.isCancelled() && !worker.isDone()) {
-            pi.message("Test in progress, aborting...");
+            msg("Test in progress, aborting...");
             return;
             //}
         }
@@ -267,10 +267,11 @@ public class App {
         }
 
         //3. update state
+        pi = new SwingUI();
         state = State.DISK_TEST_STATE;
         Gui.mainFrame.adjustSensitivity();
 
-        pi = new SwingUI();
+       // pi = new SwingUI();
         //4. set up disk worker thread and its event handlers
         worker = new DiskWorker(pi);
         pi.addPropertyChangeListenerpi((final PropertyChangeEvent event) -> {
@@ -305,7 +306,7 @@ public class App {
     private static boolean setupDataArea() {
         // Check if can write to configured location
         if (!locationDir.canWrite()) {
-            pi.message("Selected directory '" + locationDir +"' can not be written to. Trying Temp area");
+            msg("Selected directory '" + locationDir +"' can not be written to. Trying Temp area");
 
             try {
                 locationDir = Files.createTempDirectory("badBM").toFile();
@@ -315,7 +316,7 @@ public class App {
             }
 
             if (!locationDir.canWrite()) {
-                pi.message("Can not write to Temp area, aborting this benchmark");
+                msg("Can not write to Temp area, aborting this benchmark");
                 return false;
             }
         }
@@ -323,9 +324,9 @@ public class App {
         // Remove existing test data if exist
         if (App.autoRemoveData && dataDir.exists()) {
             if (dataDir.delete()) {
-                pi.message("removed existing data dir");
+                msg("removed existing data dir");
             } else {
-                pi.message("unable to remove existing data dir");
+                msg("unable to remove existing data dir");
             }
         }
 

@@ -16,9 +16,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @author Y Aaronson
  */
 
-public class BadbmTest2 {
+public class BadBMTest {
 
-    programUI pi = new BadbmTest();
+    programUI pi = new TestUI();
 
     /**
      * Bruteforce setup of static classes/fields to allow DiskWorker to run.
@@ -45,9 +45,9 @@ public class BadbmTest2 {
         //5. remove existing test data if exist
         if (App.dataDir.exists()) {
             if (App.dataDir.delete()) {
-                pi.message("removed existing data dir");
+                App.msg("removed existing data dir");
             } else {
-                pi.message("unable to remove existing data dir");
+                App.msg("unable to remove existing data dir");
             }
         }
         else
@@ -59,15 +59,22 @@ public class BadbmTest2 {
     @Test
     void doInBackground() throws Exception {
         setupDefaultAsPerProperties();
-        Boolean result = pi.doInBackgroundpi();
+        Boolean result = App.worker.doInBackground();
         assertNotNull(result);
     }
 
     @Test
     void setProgressTest() throws Exception {
         setupDefaultAsPerProperties();
-        Boolean result = pi.doInBackgroundpi();
+        Boolean result = App.worker.doInBackground();
         assertEquals(100, pi.getProgresspi());
+    }
+
+    @Test
+    void setProgressPI() throws Exception {
+        setupDefaultAsPerProperties();
+        pi.setProgresspi(87);
+        assertEquals(87, pi.getProgresspi());
     }
 
 }
