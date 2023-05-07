@@ -17,13 +17,18 @@ import static edu.touro.mco152.bm.App.*;
 import static edu.touro.mco152.bm.App.KILOBYTE;
 import static edu.touro.mco152.bm.DiskMark.MarkType.READ;
 
-public class ReadBenchmark {
+public class ReadBenchmark implements CmdBenchmark {
 
-    public static boolean readingBenchmark(programUI pu){
+    programUI pu;
 
+    public ReadBenchmark(programUI pu) {
+        this.pu = pu;
+    }
 
+    @Override
+    public void execute(){
 
-                   /*
+        /*
           init local vars that keep track of benchmarks, and a large read/write buffer
          */
     int wUnitsComplete = 0, rUnitsComplete = 0, unitsComplete;
@@ -98,7 +103,7 @@ public class ReadBenchmark {
                         ex.getMessage();
                 JOptionPane.showMessageDialog(Gui.mainFrame, emsg, "Unable to READ", JOptionPane.ERROR_MESSAGE);
                 msg(emsg);
-                return false;
+                return;
             }
             long endTime = System.nanoTime();
             long elapsedTimeNs = endTime - startTime;
@@ -126,8 +131,6 @@ public class ReadBenchmark {
 
         Gui.runPanel.addRun(run);
 
-
-        return false;
     }
 
 }

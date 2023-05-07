@@ -16,9 +16,16 @@ import static edu.touro.mco152.bm.App.*;
 import static edu.touro.mco152.bm.App.msg;
 import static edu.touro.mco152.bm.DiskMark.MarkType.WRITE;
 
-public class WriteBenchmark {
+public class WriteBenchmark implements CmdBenchmark{
 
-    public static void writingBenchmark(programUI pu) {
+    programUI pu;
+
+    public WriteBenchmark(programUI pu) {
+        this.pu = pu;
+    }
+
+    @Override
+    public void execute() {
 
                 /*
           init local vars that keep track of benchmarks, and a large read/write buffer
@@ -147,5 +154,6 @@ public class WriteBenchmark {
 
             Gui.runPanel.addRun(run);
 
-    }
+
+            }
 }

@@ -3,7 +3,6 @@ package edu.touro.mco152.bm;
 import edu.touro.mco152.bm.persist.DiskRun;
         import edu.touro.mco152.bm.persist.EM;
         import edu.touro.mco152.bm.ui.Gui;
-
         import jakarta.persistence.EntityManager;
         import javax.swing.*;
         import java.io.File;
@@ -14,7 +13,6 @@ import edu.touro.mco152.bm.persist.DiskRun;
         import java.util.List;
         import java.util.logging.Level;
         import java.util.logging.Logger;
-
         import static edu.touro.mco152.bm.App.*;
         import static edu.touro.mco152.bm.DiskMark.MarkType.READ;
         import static edu.touro.mco152.bm.DiskMark.MarkType.WRITE;
@@ -43,8 +41,12 @@ public class DiskWorker  {
     Boolean lastStatus = null;  // so far unknown
     programUI pu;
 
+    BenchmarkInvoker cmdInvoker;
+
     public DiskWorker(programUI pu){
+
         this.pu = pu;
+        this.cmdInvoker = new BenchmarkInvoker(pu);
     }
 
     protected Boolean doInBackground() throws Exception {
@@ -66,7 +68,7 @@ public class DiskWorker  {
           The GUI allows a Write, Read, or both types of BMs to be started. They are done serially.
          */
         if (App.writeTest) {
-           WriteBenchmark.writingBenchmark(pu);
+           cmdInvoker.executor(false);
         }
 
         /*
@@ -89,7 +91,7 @@ public class DiskWorker  {
 
         // Same as above, just for Read operations instead of Writes.
         if (App.readTest) {
-         ReadBenchmark.readingBenchmark(pu);
+         cmdInvoker.executor(true);
         }
         App.nextMarkNumber += App.numOfMarks;
         return true;
