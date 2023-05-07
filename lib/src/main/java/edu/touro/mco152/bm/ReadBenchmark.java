@@ -33,7 +33,7 @@ public class ReadBenchmark implements CmdBenchmark {
           init local vars that keep track of benchmarks, and a large read/write buffer
          */
     int wUnitsComplete = 0, rUnitsComplete = 0, unitsComplete;
-    int wUnitsTotal = 0;
+    int wUnitsTotal = App.writeTest ? numOfBlocks * numOfMarks : 0;
     int rUnitsTotal = App.readTest ? numOfBlocks * numOfMarks : 0;
     int unitsTotal = wUnitsTotal + rUnitsTotal;
     float percentComplete;
