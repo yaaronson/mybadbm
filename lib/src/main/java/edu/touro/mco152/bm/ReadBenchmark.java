@@ -26,13 +26,14 @@ public class ReadBenchmark implements CmdBenchmark {
     }
 
     @Override
-    public void execute(){
+    public void execute(int numOfBlocks, int numOfMarks,int blockSizeKb,
+                        DiskRun.BlockSequence blockSequence ){
 
         /*
           init local vars that keep track of benchmarks, and a large read/write buffer
          */
     int wUnitsComplete = 0, rUnitsComplete = 0, unitsComplete;
-    int wUnitsTotal = App.writeTest ? numOfBlocks * numOfMarks : 0;
+    int wUnitsTotal = 0;
     int rUnitsTotal = App.readTest ? numOfBlocks * numOfMarks : 0;
     int unitsTotal = wUnitsTotal + rUnitsTotal;
     float percentComplete;
@@ -58,9 +59,9 @@ public class ReadBenchmark implements CmdBenchmark {
 
 
         DiskRun run = new DiskRun(DiskRun.IOMode.READ, App.blockSequence);
-        run.setNumMarks(App.numOfMarks);
-        run.setNumBlocks(App.numOfBlocks);
-        run.setBlockSize(App.blockSizeKb);
+        run.setNumMarks(numOfMarks);
+        run.setNumBlocks(numOfBlocks);
+        run.setBlockSize(blockSizeKb);
         run.setTxSize(App.targetTxSizeKb());
         run.setDiskInfo(Util.getDiskInfo(dataDir));
 
@@ -69,7 +70,7 @@ public class ReadBenchmark implements CmdBenchmark {
         Gui.chartPanel.getChart().getTitle().setVisible(true);
         Gui.chartPanel.getChart().getTitle().setText(run.getDiskInfo());
 
-        for (int m = startFileNum; m < startFileNum + App.numOfMarks && !pu.isCancelledpi(); m++) {
+        for (int m = startFileNum; m < startFileNum + numOfMarks && !pu.isCancelledpi(); m++) {
 
             if (App.multiFile) {
                 testFile = new File(dataDir.getAbsolutePath()
@@ -83,7 +84,7 @@ public class ReadBenchmark implements CmdBenchmark {
             try {
                 try (RandomAccessFile rAccFile = new RandomAccessFile(testFile, "r")) {
                     for (int b = 0; b < numOfBlocks; b++) {
-                        if (App.blockSequence == DiskRun.BlockSequence.RANDOM) {
+                        if (blockSequence == DiskRun.BlockSequence.RANDOM) {
                             int rLoc = Util.randInt(0, numOfBlocks - 1);
                             rAccFile.seek((long) rLoc * blockSize);
                         } else {

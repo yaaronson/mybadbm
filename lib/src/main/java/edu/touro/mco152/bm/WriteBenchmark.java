@@ -25,7 +25,8 @@ public class WriteBenchmark implements CmdBenchmark{
     }
 
     @Override
-    public void execute() {
+    public void execute(int numOfBlocks, int numOfMarks,int blockSizeKb,
+                        DiskRun.BlockSequence blockSequence) {
 
                 /*
           init local vars that keep track of benchmarks, and a large read/write buffer
@@ -55,10 +56,10 @@ public class WriteBenchmark implements CmdBenchmark{
 
         int startFileNum = App.nextMarkNumber;
 
-            DiskRun run = new DiskRun(DiskRun.IOMode.WRITE, App.blockSequence);
-            run.setNumMarks(App.numOfMarks);
-            run.setNumBlocks(App.numOfBlocks);
-            run.setBlockSize(App.blockSizeKb);
+            DiskRun run = new DiskRun(DiskRun.IOMode.WRITE, blockSequence);
+            run.setNumMarks(numOfMarks);
+            run.setNumBlocks(numOfBlocks);
+            run.setBlockSize(blockSizeKb);
             run.setTxSize(App.targetTxSizeKb());
             run.setDiskInfo(Util.getDiskInfo(dataDir));
 
@@ -78,7 +79,7 @@ public class WriteBenchmark implements CmdBenchmark{
               that keeps writing data (in its own loop - for specified # of blocks). Each 'Mark' is timed
               and is reported to the GUI for display as each Mark completes.
              */
-            for (int m = startFileNum; m < startFileNum + App.numOfMarks && !pu.isCancelledpi(); m++) {
+            for (int m = startFileNum; m < startFileNum + numOfMarks && !pu.isCancelledpi(); m++) {
 
                 if (App.multiFile) {
                     testFile = new File(dataDir.getAbsolutePath()
@@ -97,7 +98,7 @@ public class WriteBenchmark implements CmdBenchmark{
                 try {
                     try (RandomAccessFile rAccFile = new RandomAccessFile(testFile, mode)) {
                         for (int b = 0; b < numOfBlocks; b++) {
-                            if (App.blockSequence == DiskRun.BlockSequence.RANDOM) {
+                            if (blockSequence == DiskRun.BlockSequence.RANDOM) {
                                 int rLoc = Util.randInt(0, numOfBlocks - 1);
                                 rAccFile.seek((long) rLoc * blockSize);
                             } else {
@@ -153,7 +154,6 @@ public class WriteBenchmark implements CmdBenchmark{
             em.getTransaction().commit();
 
             Gui.runPanel.addRun(run);
-
 
             }
 }

@@ -1,5 +1,7 @@
 package edu.touro.mco152.bm;
 
+import edu.touro.mco152.bm.persist.DiskRun;
+
 public class BenchmarkInvoker {
 
     public CmdBenchmark cmdread;
@@ -12,11 +14,14 @@ public class BenchmarkInvoker {
 
     }
 
-    public void executor(boolean doRead){
+    public void executor(boolean doRead, int numOfBlocks, int numOfMarks,int blockSizeKb,
+                         DiskRun.BlockSequence blockSequence){
         if (doRead){
-            cmdread.execute();
+            cmdread.execute( numOfBlocks,  numOfMarks, blockSizeKb,
+            blockSequence);
         } else {
-            cmdwrite.execute();
+            cmdwrite.execute(numOfBlocks,  numOfMarks, blockSizeKb,
+                    blockSequence);
         }
     }
 }
