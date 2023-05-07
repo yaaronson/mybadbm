@@ -30,13 +30,6 @@ public interface programUI {
     void publishpi(DiskMark wMark);
 
 
-//    /**
-//     *
-//     * @param message the messages to output
-//     */
-//    void message(String message);
-
-
     /**
      * Gets the progress of the task.
      * @return
