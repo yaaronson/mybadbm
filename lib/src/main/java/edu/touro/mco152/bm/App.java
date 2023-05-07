@@ -1,19 +1,19 @@
 package edu.touro.mco152.bm;
 
-import edu.touro.mco152.bm.persist.DiskRun;
-import edu.touro.mco152.bm.ui.Gui;
-import edu.touro.mco152.bm.ui.MainFrame;
-import edu.touro.mco152.bm.ui.SelectFrame;
+        import edu.touro.mco152.bm.persist.DiskRun;
+        import edu.touro.mco152.bm.ui.Gui;
+        import edu.touro.mco152.bm.ui.MainFrame;
+        import edu.touro.mco152.bm.ui.SelectFrame;
 
-import javax.swing.SwingWorker.StateValue;
-import javax.swing.*;
-import javax.swing.UIManager.LookAndFeelInfo;
-import java.beans.PropertyChangeEvent;
-import java.io.*;
-import java.nio.file.Files;
-import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+        import javax.swing.SwingWorker.StateValue;
+        import javax.swing.*;
+        import javax.swing.UIManager.LookAndFeelInfo;
+        import java.beans.PropertyChangeEvent;
+        import java.io.*;
+        import java.nio.file.Files;
+        import java.util.Properties;
+        import java.util.logging.Level;
+        import java.util.logging.Logger;
 
 /**
  * Primary class for global variables, main and common methods.
@@ -49,6 +49,9 @@ public class App {
     public static int nextMarkNumber = 1;   // number of the next mark
     public static double wMax = -1, wMin = -1, wAvg = -1;
     public static double rMax = -1, rMin = -1, rAvg = -1;
+
+    //new  - referencing the Interface
+    public static programUI pi;
 
     /**
      * @param args the command line arguments
@@ -237,10 +240,15 @@ public class App {
 
     public static void cancelBenchmark() {
         if (worker == null) {
-            msg("worker is null abort...");
+            msg("worker is null abort..."); //msg("worker is null abort...");
             return;
         }
-        worker.cancel(true);
+        pi.cancelpi(true);
+    }
+
+    //setter method
+    public static void setpi(programUI pi){
+        App.pi = pi;
     }
 
     public static void startBenchmark() {
@@ -259,12 +267,14 @@ public class App {
         }
 
         //3. update state
+        pi = new SwingUI();
         state = State.DISK_TEST_STATE;
         Gui.mainFrame.adjustSensitivity();
 
+       // pi = new SwingUI();
         //4. set up disk worker thread and its event handlers
-        worker = new DiskWorker();
-        worker.addPropertyChangeListener((final PropertyChangeEvent event) -> {
+        worker = new DiskWorker(pi);
+        pi.addPropertyChangeListenerpi((final PropertyChangeEvent event) -> {
             switch (event.getPropertyName()) {
                 case "progress":
                     int value = (Integer) event.getNewValue();
@@ -285,7 +295,7 @@ public class App {
         });
 
         //5. start the Swing worker thread
-        worker.execute();
+        pi.executepi();
     }
 
     /**
@@ -392,3 +402,4 @@ public class App {
 
     public enum State {IDLE_STATE, DISK_TEST_STATE}
 }
+
