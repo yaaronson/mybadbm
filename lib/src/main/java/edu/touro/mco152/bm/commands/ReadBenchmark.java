@@ -1,7 +1,12 @@
-package edu.touro.mco152.bm;
+package edu.touro.mco152.bm.commands;
 
+import edu.touro.mco152.bm.App;
+import edu.touro.mco152.bm.DiskMark;
+import edu.touro.mco152.bm.Util;
+import edu.touro.mco152.bm.commands.CmdBenchmark;
 import edu.touro.mco152.bm.persist.DiskRun;
 import edu.touro.mco152.bm.persist.EM;
+import edu.touro.mco152.bm.programUI;
 import edu.touro.mco152.bm.ui.Gui;
 import jakarta.persistence.EntityManager;
 
@@ -17,6 +22,12 @@ import static edu.touro.mco152.bm.App.*;
 import static edu.touro.mco152.bm.App.KILOBYTE;
 import static edu.touro.mco152.bm.DiskMark.MarkType.READ;
 
+/**
+ * This class implements the CmdBenchmark interface and executes the read
+ * benchmark. It initializes local variables that keeps track of benchmarks and a large read/write
+ * buffer. It also sets up the DiskRun object and the DiskMark object that will be used to pass
+ * progress to the user interface.
+ */
 public class ReadBenchmark implements CmdBenchmark {
 
     programUI pu;
@@ -25,6 +36,13 @@ public class ReadBenchmark implements CmdBenchmark {
         this.pu = pu;
     }
 
+    /**
+     * This method reads from the test file, measures the read throughput, and updates the user interface with the progress.
+     * @param numOfBlocks The number of blocks to be used in the benchmark
+     * @param numOfMarks The number of times to repeat the benchmark
+     * @param blockSizeKb The size of each block in kilobytes
+     * @param blockSequence The sequence in which to access the blocks
+     */
     @Override
     public void execute(int numOfBlocks, int numOfMarks,int blockSizeKb,
                         DiskRun.BlockSequence blockSequence ){

@@ -1,4 +1,4 @@
-package edu.touro.mco152.bm;
+package edu.touro.mco152.bm.commands;
 
 import edu.touro.mco152.bm.persist.DiskRun;
 

@@ -1,5 +1,6 @@
 package edu.touro.mco152.bm;
 
+import edu.touro.mco152.bm.commands.BenchmarkInvoker;
 import edu.touro.mco152.bm.ui.Gui;
 import edu.touro.mco152.bm.ui.MainFrame;
 import org.junit.jupiter.api.Test;
@@ -56,6 +57,9 @@ public class CMDTest {
 
     BenchmarkInvoker bi = new BenchmarkInvoker(pi);
 
+    /**
+     * Unit test for read benchmark
+     */
     @Test
     void ReadBenchmark() {
         setupDefaultAsPerProperties();
@@ -63,6 +67,9 @@ public class CMDTest {
         assertEquals(100, pi.getProgresspi());
     }
 
+    /**
+     * Unit test for write benchmark
+     */
     @Test
     void WriteBenchmark() {
         setupDefaultAsPerProperties();

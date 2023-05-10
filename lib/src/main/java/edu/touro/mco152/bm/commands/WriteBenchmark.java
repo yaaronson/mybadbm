@@ -1,7 +1,12 @@
-package edu.touro.mco152.bm;
+package edu.touro.mco152.bm.commands;
 
+import edu.touro.mco152.bm.App;
+import edu.touro.mco152.bm.DiskMark;
+import edu.touro.mco152.bm.Util;
+import edu.touro.mco152.bm.commands.CmdBenchmark;
 import edu.touro.mco152.bm.persist.DiskRun;
 import edu.touro.mco152.bm.persist.EM;
+import edu.touro.mco152.bm.programUI;
 import edu.touro.mco152.bm.ui.Gui;
 import jakarta.persistence.EntityManager;
 
@@ -16,7 +21,12 @@ import static edu.touro.mco152.bm.App.*;
 import static edu.touro.mco152.bm.App.msg;
 import static edu.touro.mco152.bm.DiskMark.MarkType.WRITE;
 
-public class WriteBenchmark implements CmdBenchmark{
+/**
+ * This class implements the CmdBenchmark interface and defines the
+ * execute method that takes several input parameters for running a write benchmark on the disk.
+ */
+
+public class WriteBenchmark implements CmdBenchmark {
 
     programUI pu;
 
@@ -24,11 +34,25 @@ public class WriteBenchmark implements CmdBenchmark{
         this.pu = pu;
     }
 
+    /**
+     * This method runs the write benchmark on the disk.
+     *
+     * @param numOfBlocks  - the number of blocks for each mark in the benchmark
+     * @param numOfMarks   - the number of marks (iterations) to run in the benchmark
+     * @param blockSizeKb  - the block size in kilobytes for the benchmark
+     * @param blockSequence - the sequence in which blocks should be written
+     *
+     * The method creates a test data file, and then runs an outer loop for a specified duration
+     * (number of 'marks') of the benchmark, that keeps writing data. Each mark is timed and
+     * reported to the GUI for display as each mark completes.
+     * The results of the benchmark are persisted to a database and displayed to the user.
+     */
+
     @Override
     public void execute(int numOfBlocks, int numOfMarks,int blockSizeKb,
                         DiskRun.BlockSequence blockSequence) {
 
-                /*
+        /*
           init local vars that keep track of benchmarks, and a large read/write buffer
          */
         int wUnitsComplete = 0, rUnitsComplete = 0, unitsComplete;
@@ -45,7 +69,7 @@ public class WriteBenchmark implements CmdBenchmark{
             }
         }
 
-        DiskMark wMark;  // declare vars that will point to objects used to pass progress to UI
+        DiskMark wMark;  // declare vars that will point to object used to pass progress to UI
 
         Gui.updateLegend();  // init chart legend info
 
@@ -157,3 +181,4 @@ public class WriteBenchmark implements CmdBenchmark{
 
             }
 }
+
