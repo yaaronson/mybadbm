@@ -1,6 +1,7 @@
 package edu.touro.mco152.bm;
 
 import edu.touro.mco152.bm.commands.BenchmarkInvoker;
+import edu.touro.mco152.bm.commands.ReadBenchmark;
 import edu.touro.mco152.bm.ui.Gui;
 import edu.touro.mco152.bm.ui.MainFrame;
 import org.junit.jupiter.api.Test;
@@ -18,6 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class CMDTest {
 
     programUI pi = new TestUI();
+
+    BenchmarkInvoker bi = new BenchmarkInvoker();
 
     /**
      * Bruteforce setup of static classes/fields to allow DiskWorker to run.
@@ -55,7 +58,6 @@ public class CMDTest {
         }
     }
 
-    BenchmarkInvoker bi = new BenchmarkInvoker(pi);
 
     /**
      * Unit test for read benchmark
@@ -63,7 +65,7 @@ public class CMDTest {
     @Test
     void ReadBenchmark() {
         setupDefaultAsPerProperties();
-        bi.executor(true,25, 128,2048, SEQUENTIAL);
+        bi.executor(new ReadBenchmark(pi, 25, 128,2048, SEQUENTIAL));
         assertEquals(100, pi.getProgresspi());
     }
 
@@ -73,7 +75,7 @@ public class CMDTest {
     @Test
     void WriteBenchmark() {
         setupDefaultAsPerProperties();
-        bi.executor(false,25, 128,2048, SEQUENTIAL);
+        bi.executor(new ReadBenchmark(pi, 25, 128,2048, SEQUENTIAL));
         assertEquals(100, pi.getProgresspi());
     }
 

@@ -31,21 +31,25 @@ import static edu.touro.mco152.bm.DiskMark.MarkType.READ;
 public class ReadBenchmark implements CmdBenchmark {
 
     programUI pu;
+    int numOfBlocks;
+    int numOfMarks;
+    int blockSizeKb;
+    DiskRun.BlockSequence blockSequence;
 
-    public ReadBenchmark(programUI pu) {
+    public ReadBenchmark( programUI pu, int numOfBlocks, int numOfMarks, int blockSizeKb,
+                           DiskRun.BlockSequence blockSequence) {
         this.pu = pu;
+        this.numOfBlocks = numOfBlocks;
+        this.numOfMarks = numOfMarks;
+        this.blockSizeKb = blockSizeKb;
+        this.blockSequence = blockSequence;
     }
 
     /**
      * This method reads from the test file, measures the read throughput, and updates the user interface with the progress.
-     * @param numOfBlocks The number of blocks to be used in the benchmark
-     * @param numOfMarks The number of times to repeat the benchmark
-     * @param blockSizeKb The size of each block in kilobytes
-     * @param blockSequence The sequence in which to access the blocks
      */
     @Override
-    public void execute(int numOfBlocks, int numOfMarks,int blockSizeKb,
-                        DiskRun.BlockSequence blockSequence ){
+    public void execute(){
 
         /*
           init local vars that keep track of benchmarks, and a large read/write buffer

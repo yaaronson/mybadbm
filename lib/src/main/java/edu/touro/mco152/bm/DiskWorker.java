@@ -1,6 +1,9 @@
 package edu.touro.mco152.bm;
 
 import edu.touro.mco152.bm.commands.BenchmarkInvoker;
+import edu.touro.mco152.bm.commands.ReadBenchmark;
+import edu.touro.mco152.bm.commands.WriteBenchmark;
+import edu.touro.mco152.bm.persist.DiskRun;
 import edu.touro.mco152.bm.ui.Gui;
 
 import javax.swing.*;
@@ -37,7 +40,7 @@ public class DiskWorker  {
     public DiskWorker(programUI pu){
 
         this.pu = pu;
-        this.cmdInvoker = new BenchmarkInvoker(pu);
+        this.cmdInvoker = new BenchmarkInvoker();
     }
 
     protected Boolean doInBackground() throws Exception {
@@ -59,7 +62,8 @@ public class DiskWorker  {
           The GUI allows a Write, Read, or both types of BMs to be started. They are done serially.
          */
         if (App.writeTest) {
-           cmdInvoker.executor(false, numOfBlocks, numOfMarks, blockSizeKb, blockSequence);
+           cmdInvoker.executor(new WriteBenchmark(pu,App.numOfBlocks, App.numOfMarks, App. blockSizeKb,
+            App.blockSequence));
         }
 
         /*
@@ -82,7 +86,8 @@ public class DiskWorker  {
 
         // Same as above, just for Read operations instead of Writes.
         if (App.readTest) {
-         cmdInvoker.executor(true, numOfBlocks, numOfMarks, blockSizeKb, blockSequence);
+         cmdInvoker.executor(new ReadBenchmark(pu,App.numOfBlocks, App.numOfMarks, App. blockSizeKb,
+                 App.blockSequence));
         }
         App.nextMarkNumber += App.numOfMarks;
         return true;

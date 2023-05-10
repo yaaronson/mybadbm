@@ -29,18 +29,24 @@ import static edu.touro.mco152.bm.DiskMark.MarkType.WRITE;
 public class WriteBenchmark implements CmdBenchmark {
 
     programUI pu;
+    int numOfBlocks;
+    int numOfMarks;
+    int blockSizeKb;
+    DiskRun.BlockSequence blockSequence;
 
-    public WriteBenchmark(programUI pu) {
+    public WriteBenchmark( programUI pu, int numOfBlocks, int numOfMarks, int blockSizeKb,
+                           DiskRun.BlockSequence blockSequence) {
         this.pu = pu;
+        this.numOfBlocks = numOfBlocks;
+        this.numOfMarks = numOfMarks;
+        this.blockSizeKb = blockSizeKb;
+        this.blockSequence = blockSequence;
     }
+
+
 
     /**
      * This method runs the write benchmark on the disk.
-     *
-     * @param numOfBlocks  - the number of blocks for each mark in the benchmark
-     * @param numOfMarks   - the number of marks (iterations) to run in the benchmark
-     * @param blockSizeKb  - the block size in kilobytes for the benchmark
-     * @param blockSequence - the sequence in which blocks should be written
      *
      * The method creates a test data file, and then runs an outer loop for a specified duration
      * (number of 'marks') of the benchmark, that keeps writing data. Each mark is timed and
@@ -49,8 +55,7 @@ public class WriteBenchmark implements CmdBenchmark {
      */
 
     @Override
-    public void execute(int numOfBlocks, int numOfMarks,int blockSizeKb,
-                        DiskRun.BlockSequence blockSequence) {
+    public void execute() {
 
         /*
           init local vars that keep track of benchmarks, and a large read/write buffer
