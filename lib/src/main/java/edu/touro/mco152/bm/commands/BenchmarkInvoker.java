@@ -8,9 +8,9 @@ import edu.touro.mco152.bm.programUI;
  */
 public class BenchmarkInvoker {
 
-
     /**
-     * Executes the benchmark command based off the parameters
+     * This method invokes the execute method of the provided command to execute the benchmark
+     * @param cmd the benchmark to be executed
      */
     public void executor(CmdBenchmark cmd){
             cmd.execute();

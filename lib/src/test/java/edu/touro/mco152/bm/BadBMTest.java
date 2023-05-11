@@ -56,6 +56,10 @@ public class BadBMTest {
         }
     }
 
+    /**
+     * Tests DoInBackround method
+     * @throws Exception if error
+     */
     @Test
     void doInBackground() throws Exception {
         setupDefaultAsPerProperties();
@@ -63,6 +67,10 @@ public class BadBMTest {
         assertNotNull(result);
     }
 
+    /**
+     * makes sure that the setProgress method properly sets the progress value
+     * @throws Exception if error
+     */
     @Test
     void setProgressTest() throws Exception {
         setupDefaultAsPerProperties();
@@ -70,6 +78,10 @@ public class BadBMTest {
         assertEquals(100, pi.getProgresspi());
     }
 
+    /**
+     * Tests the getProgress method
+     * @throws Exception if error
+     */
     @Test
     void setProgressPI() throws Exception {
         setupDefaultAsPerProperties();

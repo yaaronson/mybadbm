@@ -46,7 +46,8 @@ public class ReadBenchmark implements CmdBenchmark {
     }
 
     /**
-     * This method reads from the test file, measures the read throughput, and updates the user interface with the progress.
+     * This method executes the read benchmark, it also reads from the test file, measures the read throughput,
+     * and updates the user interface with the progress
      */
     @Override
     public void execute(){

@@ -38,9 +38,8 @@ public class DiskWorker  {
     BenchmarkInvoker cmdInvoker;
 
     public DiskWorker(programUI pu){
-
         this.pu = pu;
-        this.cmdInvoker = new BenchmarkInvoker();
+        this.cmdInvoker = new BenchmarkInvoker(); //
     }
 
     protected Boolean doInBackground() throws Exception {

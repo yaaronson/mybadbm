@@ -2,6 +2,7 @@ package edu.touro.mco152.bm;
 
 import edu.touro.mco152.bm.commands.BenchmarkInvoker;
 import edu.touro.mco152.bm.commands.ReadBenchmark;
+import edu.touro.mco152.bm.commands.WriteBenchmark;
 import edu.touro.mco152.bm.ui.Gui;
 import edu.touro.mco152.bm.ui.MainFrame;
 import org.junit.jupiter.api.Test;
@@ -75,7 +76,7 @@ public class CMDTest {
     @Test
     void WriteBenchmark() {
         setupDefaultAsPerProperties();
-        bi.executor(new ReadBenchmark(pi, 25, 128,2048, SEQUENTIAL));
+        bi.executor(new WriteBenchmark(pi, 25, 128,2048, SEQUENTIAL));
         assertEquals(100, pi.getProgresspi());
     }
 

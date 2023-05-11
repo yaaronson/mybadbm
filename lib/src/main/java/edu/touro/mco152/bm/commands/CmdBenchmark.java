@@ -3,14 +3,15 @@ package edu.touro.mco152.bm.commands;
 import edu.touro.mco152.bm.persist.DiskRun;
 
 /**
- * Interface for benchmarking disk performance.
+ * The CmdBenchmark interface represents a benchmark command
  */
 public interface CmdBenchmark {
 
     /**
-     * Executes the disk benchmark with the given parameters
+     * Executes the benchmark command, Inheriting classes should provide logic for executing
+     * the benchmark
      */
-    public void execute();
+    void execute();
 
 }
 

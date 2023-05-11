@@ -270,7 +270,6 @@ public class App {
         state = State.DISK_TEST_STATE;
         Gui.mainFrame.adjustSensitivity();
 
-       // pi = new SwingUI();
         //4. set up disk worker thread and its event handlers
         worker = new DiskWorker(pi);
         pi.addPropertyChangeListenerpi((final PropertyChangeEvent event) -> {
