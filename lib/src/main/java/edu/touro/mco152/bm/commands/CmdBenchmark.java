@@ -8,8 +8,7 @@ import edu.touro.mco152.bm.persist.DiskRun;
 public interface CmdBenchmark {
 
     /**
-     * Executes the benchmark command, Inheriting classes should provide logic for executing
-     * the benchmark
+     * Executes the benchmark command, Inheriting classes will provide their own implementation
      */
     void execute();
 
