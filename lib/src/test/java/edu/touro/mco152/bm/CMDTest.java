@@ -1,5 +1,8 @@
 package edu.touro.mco152.bm;
 
+import edu.touro.mco152.bm.commands.BenchmarkInvoker;
+import edu.touro.mco152.bm.commands.ReadBenchmark;
+import edu.touro.mco152.bm.commands.WriteBenchmark;
 import edu.touro.mco152.bm.ui.Gui;
 import edu.touro.mco152.bm.ui.MainFrame;
 import org.junit.jupiter.api.Test;
@@ -7,18 +10,18 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.Properties;
 
+import static edu.touro.mco152.bm.persist.DiskRun.BlockSequence.SEQUENTIAL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Implementation of unit tests
- *
- * @author Y Aaronson
+ * Implementation of Command Pattern Unit Tests
  */
-
-public class BadBMTest {
+public class CMDTest {
 
     programUI pi = new TestUI();
+
+    BenchmarkInvoker bi = new BenchmarkInvoker();
 
     /**
      * Bruteforce setup of static classes/fields to allow DiskWorker to run.
@@ -56,37 +59,25 @@ public class BadBMTest {
         }
     }
 
-    /**
-     * Tests DoInBackround method
-     * @throws Exception if error
-     */
-    @Test
-    void doInBackground() throws Exception {
-        setupDefaultAsPerProperties();
-        Boolean result = App.worker.doInBackground();
-        assertNotNull(result);
-    }
 
     /**
-     * makes sure that the setProgress method properly sets the progress value
-     * @throws Exception if error
+     * Unit test for read benchmark
      */
     @Test
-    void setProgressTest() throws Exception {
+    void ReadBenchmark() {
         setupDefaultAsPerProperties();
-        Boolean result = App.worker.doInBackground();
+        bi.executor(new ReadBenchmark(pi, 25, 128,2048, SEQUENTIAL));
         assertEquals(100, pi.getProgresspi());
     }
 
     /**
-     * Tests the getProgress method
-     * @throws Exception if error
+     * Unit test for write benchmark
      */
     @Test
-    void setProgressPI() throws Exception {
+    void WriteBenchmark() {
         setupDefaultAsPerProperties();
-        pi.setProgresspi(87);
-        assertEquals(87, pi.getProgresspi());
+        bi.executor(new WriteBenchmark(pi, 25, 128,2048, SEQUENTIAL));
+        assertEquals(100, pi.getProgresspi());
     }
 
 }

@@ -4,7 +4,6 @@ package edu.touro.mco152.bm;
         import edu.touro.mco152.bm.ui.Gui;
         import edu.touro.mco152.bm.ui.MainFrame;
         import edu.touro.mco152.bm.ui.SelectFrame;
-
         import javax.swing.SwingWorker.StateValue;
         import javax.swing.*;
         import javax.swing.UIManager.LookAndFeelInfo;
@@ -271,7 +270,6 @@ public class App {
         state = State.DISK_TEST_STATE;
         Gui.mainFrame.adjustSensitivity();
 
-       // pi = new SwingUI();
         //4. set up disk worker thread and its event handlers
         worker = new DiskWorker(pi);
         pi.addPropertyChangeListenerpi((final PropertyChangeEvent event) -> {

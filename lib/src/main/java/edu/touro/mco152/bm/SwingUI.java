@@ -97,16 +97,6 @@ public class SwingUI extends SwingWorker<Boolean, DiskMark> implements programUI
     }
 
     /**
-     * Displays the given message in the mainFrame.
-     * @param message the message to display
-     */
-//    @Override
-//    public void message(String message) {
-//
-//        Gui.mainFrame.msg(message);
-//    }
-
-    /**
      * Returns the progress of the SwingWorker.
      *
      * @return the progress of the SwingWorker, as a percentage from 0 to 100
