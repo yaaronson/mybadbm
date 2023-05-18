@@ -3,6 +3,9 @@ package edu.touro.mco152.bm;
 import edu.touro.mco152.bm.commands.BenchmarkInvoker;
 import edu.touro.mco152.bm.commands.ReadBenchmark;
 import edu.touro.mco152.bm.commands.WriteBenchmark;
+import edu.touro.mco152.bm.observer.ObserverBenchmark;
+import edu.touro.mco152.bm.observer.SlackObserver;
+import edu.touro.mco152.bm.persist.DatabaseObserver;
 import edu.touro.mco152.bm.persist.DiskRun;
 import edu.touro.mco152.bm.ui.Gui;
 
@@ -39,7 +42,10 @@ public class DiskWorker  {
 
     public DiskWorker(programUI pu){
         this.pu = pu;
-        this.cmdInvoker = new BenchmarkInvoker(); //
+        this.cmdInvoker = new BenchmarkInvoker();
+        this.cmdInvoker.registerObserver(new SlackObserver());
+        this.cmdInvoker.registerObserver(new DatabaseObserver());
+        this.cmdInvoker.registerObserver(new Gui());
     }
 
     protected Boolean doInBackground() throws Exception {
