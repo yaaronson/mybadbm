@@ -3,7 +3,6 @@ package edu.touro.mco152.bm.commands;
 import edu.touro.mco152.bm.App;
 import edu.touro.mco152.bm.DiskMark;
 import edu.touro.mco152.bm.Util;
-import edu.touro.mco152.bm.commands.CmdBenchmark;
 import edu.touro.mco152.bm.persist.DiskRun;
 import edu.touro.mco152.bm.persist.EM;
 import edu.touro.mco152.bm.programUI;
@@ -48,9 +47,10 @@ public class ReadBenchmark implements CmdBenchmark {
     /**
      * This method executes the read benchmark, it also reads from the test file, measures the read throughput,
      * and updates the user interface with the progress
+     * @return
      */
     @Override
-    public void execute(){
+    public boolean execute(){
 
         /*
           init local vars that keep track of benchmarks, and a large read/write buffer
@@ -127,7 +127,7 @@ public class ReadBenchmark implements CmdBenchmark {
                         ex.getMessage();
                 JOptionPane.showMessageDialog(Gui.mainFrame, emsg, "Unable to READ", JOptionPane.ERROR_MESSAGE);
                 msg(emsg);
-                return;
+                return false;
             }
             long endTime = System.nanoTime();
             long elapsedTimeNs = endTime - startTime;
@@ -155,6 +155,7 @@ public class ReadBenchmark implements CmdBenchmark {
 
         Gui.runPanel.addRun(run);
 
+        return true;
     }
 
 }

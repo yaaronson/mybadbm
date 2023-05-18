@@ -60,8 +60,9 @@ public class DiskWorker  {
         /*
           The GUI allows a Write, Read, or both types of BMs to be started. They are done serially.
          */
+        boolean write = true;
         if (App.writeTest) {
-           cmdInvoker.executor(new WriteBenchmark(pu,App.numOfBlocks, App.numOfMarks, App. blockSizeKb,
+             write = cmdInvoker.executor(new WriteBenchmark(pu,App.numOfBlocks, App.numOfMarks, App. blockSizeKb,
             App.blockSequence));
         }
 
@@ -84,12 +85,13 @@ public class DiskWorker  {
         }
 
         // Same as above, just for Read operations instead of Writes.
+        boolean read = true;
         if (App.readTest) {
-         cmdInvoker.executor(new ReadBenchmark(pu,App.numOfBlocks, App.numOfMarks, App. blockSizeKb,
+         read = cmdInvoker.executor(new ReadBenchmark(pu,App.numOfBlocks, App.numOfMarks, App. blockSizeKb,
                  App.blockSequence));
         }
         App.nextMarkNumber += App.numOfMarks;
-        return true;
+        return read && write;
     }
 
     /**
