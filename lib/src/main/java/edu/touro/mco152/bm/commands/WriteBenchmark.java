@@ -3,7 +3,7 @@ package edu.touro.mco152.bm.commands;
 import edu.touro.mco152.bm.App;
 import edu.touro.mco152.bm.DiskMark;
 import edu.touro.mco152.bm.Util;
-import edu.touro.mco152.bm.commands.CmdBenchmark;
+import edu.touro.mco152.bm.observer.RegisterObserver;
 import edu.touro.mco152.bm.persist.DiskRun;
 import edu.touro.mco152.bm.persist.EM;
 import edu.touro.mco152.bm.programUI;
@@ -50,9 +50,10 @@ public class WriteBenchmark implements CmdBenchmark {
      *  This method initializes the variables, writes data to files,
      *  calculates benchmarks, updates progress, and saves the benchmark information.
      *  It also updates the user interface to reflect the progress and adds the benchmark run to the GUI panel.
+     * @return
      */
     @Override
-    public void execute() {
+    public boolean execute(RegisterObserver register) {
 
         /*
           init local vars that keep track of benchmarks, and a large read/write buffer
@@ -174,13 +175,10 @@ public class WriteBenchmark implements CmdBenchmark {
             /*
               Persist info about the Write BM Run (e.g. into Derby Database) and add it to a GUI panel
              */
-            EntityManager em = EM.getEntityManager();
-            em.getTransaction().begin();
-            em.persist(run);
-            em.getTransaction().commit();
 
-            Gui.runPanel.addRun(run);
+        register.notifyObserver(run);
 
-            }
+        return true;
+    }
 }
 

@@ -3,7 +3,7 @@ package edu.touro.mco152.bm.commands;
 import edu.touro.mco152.bm.App;
 import edu.touro.mco152.bm.DiskMark;
 import edu.touro.mco152.bm.Util;
-import edu.touro.mco152.bm.commands.CmdBenchmark;
+import edu.touro.mco152.bm.observer.RegisterObserver;
 import edu.touro.mco152.bm.persist.DiskRun;
 import edu.touro.mco152.bm.persist.EM;
 import edu.touro.mco152.bm.programUI;
@@ -48,9 +48,10 @@ public class ReadBenchmark implements CmdBenchmark {
     /**
      * This method executes the read benchmark, it also reads from the test file, measures the read throughput,
      * and updates the user interface with the progress
+     * @return
      */
     @Override
-    public void execute(){
+    public boolean execute(RegisterObserver register){
 
         /*
           init local vars that keep track of benchmarks, and a large read/write buffer
@@ -127,7 +128,7 @@ public class ReadBenchmark implements CmdBenchmark {
                         ex.getMessage();
                 JOptionPane.showMessageDialog(Gui.mainFrame, emsg, "Unable to READ", JOptionPane.ERROR_MESSAGE);
                 msg(emsg);
-                return;
+                return false;
             }
             long endTime = System.nanoTime();
             long elapsedTimeNs = endTime - startTime;
@@ -148,13 +149,10 @@ public class ReadBenchmark implements CmdBenchmark {
             /*
               Persist info about the Read BM Run (e.g. into Derby Database) and add it to a GUI panel
              */
-        EntityManager em = EM.getEntityManager();
-        em.getTransaction().begin();
-        em.persist(run);
-        em.getTransaction().commit();
 
-        Gui.runPanel.addRun(run);
+        register.notifyObserver(run);
 
+        return true;
     }
 
 }
