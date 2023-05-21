@@ -24,14 +24,26 @@ public class BenchmarkInvoker implements RegisterObserver {
 
     ArrayList<ObserverBenchmark> list = new ArrayList<>();
 
-    public void registerObserver(ObserverBenchmark observer){
+    /**
+     * Registers Observers
+     * @param observer
+     */
+    public void registeringObserver(ObserverBenchmark observer){
         list.add(observer);
     }
 
+    /**
+     * Unregisters Observers
+     * @param observer
+     */
     public void unregisterObserver(ObserverBenchmark observer){
         list.remove(observer);
     }
 
+    /**
+     * Notifies the observers
+     * @param run
+     */
     public void notifyObserver(DiskRun run){
         for (int i = 0; i < list.size(); i++){
             list.get(i).sendNotification(run);

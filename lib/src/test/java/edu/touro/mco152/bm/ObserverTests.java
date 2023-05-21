@@ -14,7 +14,9 @@ import static edu.touro.mco152.bm.persist.DiskRun.BlockSequence.SEQUENTIAL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
+/**
+ * Unit tests our Observer
+ */
 public class ObserverTests {
 
         static programUI pi = new TestUI();
@@ -55,12 +57,15 @@ public class ObserverTests {
             }
         }
 
+    /**
+     * Tests our observers, sets a flag that the observer was invoked
+     */
     @AfterAll
     @Test
      static void RegisterObserver() {
         setupDefaultAsPerProperties();
         ChecksObserver register = new ChecksObserver();
-        bi.registerObserver(register);
+        bi.registeringObserver(register);
         bi.executor(new ReadBenchmark(pi, 25, 128,2048, SEQUENTIAL));
         assertEquals(100, pi.getProgresspi());
         assertTrue(register.observer);
@@ -69,7 +74,7 @@ public class ObserverTests {
      void TestObservers() {
         setupDefaultAsPerProperties();
         ChecksObserver register = new ChecksObserver();
-        bi.registerObserver(register);
+        bi.registeringObserver(register);
         bi.executor(new ReadBenchmark(pi, 25, 128,2048, SEQUENTIAL));
         assertEquals(100, pi.getProgresspi());
         assertTrue(register.observer);

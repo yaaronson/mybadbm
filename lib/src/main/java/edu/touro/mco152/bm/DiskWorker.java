@@ -43,9 +43,9 @@ public class DiskWorker  {
     public DiskWorker(programUI pu){
         this.pu = pu;
         this.cmdInvoker = new BenchmarkInvoker();
-        this.cmdInvoker.registerObserver(new SlackObserver());
-        this.cmdInvoker.registerObserver(new DatabaseObserver());
-        this.cmdInvoker.registerObserver(new Gui());
+        this.cmdInvoker.registeringObserver(new SlackObserver());
+        this.cmdInvoker.registeringObserver(new DatabaseObserver());
+        this.cmdInvoker.registeringObserver(new Gui());
     }
 
     protected Boolean doInBackground() throws Exception {

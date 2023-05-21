@@ -20,7 +20,7 @@ import java.text.NumberFormat;
 
 /**
  * Creates and populates a graph with data from the current run, and
- * stores gui references for easy access.
+ * stores gui references for easy access. Implements Observer benchmark interface.
  */
 public final class Gui implements ObserverBenchmark {
 
