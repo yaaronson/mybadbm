@@ -1,11 +1,9 @@
-﻿**jDiskMark** is a disk io benchmarking utility written in java, kindly made public by jamesmarkchan in https://sourceforge.net/projects/jdiskmark/  and protected under BSD License and Apache License V2.0.  See that repository for more detailed readme about functionality
+﻿**jDiskMark** is a disk io benchmarking utility written in java.
 
-This code does what is necessary to satisfy its requirements, but it is not (yet) particularly object oriented, nor is it (yet) particularly extensible, no coincidence there :-) So for the time being we will call it **"BadBM"** and we will learn how to turn it into **GoodBM**.
  
 **Product Description**
 The purpose of this program is to compute and provide some performance information about the local disk drive associated with the user’s home directory. It obtains this information by executing a series of write and/or read operations against the disk and measuring the throughput over time. The benchmarks to be executed are defined by allowing the user to select whether to do a ‘read’, ‘write’ or ‘write-read’ benchmark and to indicate how sizeable the benchmark test data should be as well as some other parameters. A GUI is provided to request all of this information and to allow the user to start, stop and monitor the benchmark. An X/Y graph is produced dynamically during each ‘run to show the progress and disk performance. A history of runs with all performance data is maintained in a persistent location and is visible in the GUI, and any significant events or errors encountered are presented in the GUI.
 
-10/2021 Updated dependencies like Eclipselink to run with JDK 17
 
 **Usage**
 
