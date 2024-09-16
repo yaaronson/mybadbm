@@ -1,6 +1,6 @@
 package edu.touro.mco152.bm.commands;
 
-import edu.touro.mco152.bm.persist.DiskRun;
+import edu.touro.mco152.bm.observer.RegisterObserver;
 
 /**
  * The CmdBenchmark interface represents a benchmark command
@@ -8,10 +8,10 @@ import edu.touro.mco152.bm.persist.DiskRun;
 public interface CmdBenchmark {
 
     /**
-     * Executes the benchmark command, Inheriting classes should provide logic for executing
-     * the benchmark
+     * Executes the benchmark command, Inheriting classes will provide their own implementation
+     * @return true if successful and false if not
      */
-    void execute();
+    boolean execute(RegisterObserver register);
 
 }
 
