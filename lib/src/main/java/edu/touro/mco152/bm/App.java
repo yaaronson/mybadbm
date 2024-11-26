@@ -14,7 +14,6 @@ package edu.touro.mco152.bm;
         import java.util.logging.Level;
         import java.util.logging.Logger;
 
-
 /**
  * Primary class for global variables, main and common methods.
  */
